@@ -1,8 +1,7 @@
-import org.scalatest.junit.JUnitSuite
 import org.junit.Test
 import org.junit.Assert._
 
-class Day01Tests extends JUnitSuite {
+class Day01Tests {
 
   @Test
   def verifyExamplesPart1Test() {
@@ -28,4 +27,4 @@ class Day01Tests extends JUnitSuite {
     assertEquals(-1, Day01.findBasementIndex("("))
   }
 
-  }
+}
