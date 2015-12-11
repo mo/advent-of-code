@@ -1,0 +1,9 @@
+To develop/run inside IDEA use "Import Project", select this directory, then select
+"Import Project From External Model" and finally "SBT". After that you can right-click
+the "DayNN" or "DayNNTests" scala classes and select "Run".
+
+To develop/run from command line, use:
+
+  $ sbt run
+  $ sbt test
+  $ sbt 'runMain Day01'
