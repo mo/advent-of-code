@@ -7,8 +7,14 @@ object Day04 {
 
   def calcAdventCoinNumber(zeros: Int, key: String) : Int = {
     var num = 1
-    while (!bytesToHex(md5(key + num)).startsWith("0" * zeros)) {
+    var hash = md5(key + num)
+    while (!bytesToHex(hash).startsWith("0" * zeros)) {
       num += 1
+      hash = md5(key + num)
+      while (hash(0) != 0) {
+        num += 1
+        hash = md5(key + num)
+      }
     }
     num
   }
