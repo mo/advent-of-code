@@ -4,7 +4,7 @@ import org.junit.Assert._
 class Day01Tests {
 
   @Test
-  def verifyExamplesPart1Test() {
+  def verifyExamplesPart1Test(): Unit = {
     assertEquals(0, Day01.findFloor("(())"))
     assertEquals(0, Day01.findFloor("()()"))
     assertEquals(3, Day01.findFloor("((("))
@@ -17,7 +17,7 @@ class Day01Tests {
   }
 
   @Test
-  def verifyExamplesPart2Test() {
+  def verifyExamplesPart2Test(): Unit = {
     assertEquals(1, Day01.findBasementIndex(")"))
     assertEquals(5, Day01.findBasementIndex("()())"))
   }
