@@ -26,9 +26,16 @@ object Day01 {
     -1
   }
 
-  def main(args: Array[String]): Unit = {
+  def solve(): (Int, Int) = {
     val directions = io.Source.fromFile("data/day01.txt").mkString
-    println("final floor: " + findFloor(directions))
-    println("first entered basement at index: " + findBasementIndex(directions))
+    val finalFloor = findFloor(directions)
+    val firstBasementIndex = findBasementIndex(directions)
+    (finalFloor, firstBasementIndex)
+  }
+
+  def main(args: Array[String]): Unit = {
+    val (finalFloor, firstBasementIndex) = solve()
+    println("final floor: " + finalFloor)
+    println("first entered basement at index: " + firstBasementIndex)
   }
 }

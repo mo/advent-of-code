@@ -19,7 +19,7 @@ object Day02 {
 
   }
 
-  def main(args: Array[String]): Unit = {
+  def solve(): (Int, Int) = {
     val inputFile = io.Source.fromFile("data/day02.txt")
     var totalPaperNeeded = 0
     var totalRibbonNeeded = 0
@@ -28,6 +28,11 @@ object Day02 {
       totalPaperNeeded += calcNeededPaper(giftDimensions)
       totalRibbonNeeded += calcNeededRibbon(giftDimensions)
     }
+    (totalPaperNeeded, totalRibbonNeeded)
+  }
+
+  def main(args: Array[String]): Unit = {
+    val (totalPaperNeeded, totalRibbonNeeded) = solve()
     println("total paper needed: " + totalPaperNeeded + " square feet")
     println("total ribbon needed: " + totalRibbonNeeded + " feet")
   }

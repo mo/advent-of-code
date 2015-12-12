@@ -27,4 +27,11 @@ class Day01Tests {
     assertEquals(-1, Day01.findBasementIndex("("))
   }
 
+  @Test
+  def verifyCorrectAnswers(): Unit = {
+    val directions = io.Source.fromFile("data/day01.txt").mkString
+    assertEquals(74, Day01.findFloor(directions))
+    assertEquals(1795, Day01.findBasementIndex(directions))
+  }
+
 }
