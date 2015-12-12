@@ -4,6 +4,17 @@ the "DayNN" or "DayNNTests" scala classes and select "Run".
 
 To develop/run from command line, use:
 
-  $ sbt run
-  $ sbt test
-  $ sbt 'runMain Day01'
+    $ sbt run
+    $ sbt test
+
+    # run a specific program
+    $ sbt 'runMain Day01'
+
+    # run a specific test case
+    $ sbt 'test-only -- Day01Tests.verifyEdgeCases'
+
+    # run certain tests based on a wildcard
+    $ sbt 'test-only -- *Part1*'
+
+    # run tests without color output
+    $ sbt 'test-only -- -n'
