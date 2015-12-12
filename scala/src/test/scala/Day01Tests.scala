@@ -29,9 +29,9 @@ class Day01Tests {
 
   @Test
   def verifyCorrectAnswers(): Unit = {
-    val directions = io.Source.fromFile("data/day01.txt").mkString
-    assertEquals(74, Day01.findFloor(directions))
-    assertEquals(1795, Day01.findBasementIndex(directions))
+    val (finalFloor, firstBasementIndex) = Day01.solve()
+    assertEquals(74, finalFloor)
+    assertEquals(1795, firstBasementIndex)
   }
 
 }

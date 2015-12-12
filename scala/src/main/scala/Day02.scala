@@ -20,7 +20,7 @@ object Day02 {
   }
 
   def solve(): (Int, Int) = {
-    val inputFile = io.Source.fromFile("data/day02.txt")
+    val inputFile = DataFolder.openFile("day02.txt")
     var totalPaperNeeded = 0
     var totalRibbonNeeded = 0
     for (giftDimensionLine <- inputFile.getLines()) {

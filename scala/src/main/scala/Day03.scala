@@ -23,7 +23,7 @@ object Day03 {
   }
 
   def solve(): (Int, Int) = {
-    val directions = io.Source.fromFile("data/day03.txt").mkString
+    val directions = DataFolder.openFile("day03.txt").mkString
     val housesVisitedPart1 = calcVisitedHouses(directions).size
     val housesVisitedPart2 = calcVisitedHousesPart2(directions).size
     (housesVisitedPart1, housesVisitedPart2)

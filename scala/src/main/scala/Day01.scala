@@ -27,7 +27,7 @@ object Day01 {
   }
 
   def solve(): (Int, Int) = {
-    val directions = io.Source.fromFile("data/day01.txt").mkString
+    val directions = DataFolder.openFile("day01.txt").mkString
     val finalFloor = findFloor(directions)
     val firstBasementIndex = findBasementIndex(directions)
     (finalFloor, firstBasementIndex)
