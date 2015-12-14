@@ -1,3 +1,7 @@
+import java.awt.Color
+import java.awt.image.BufferedImage
+import java.io.File
+import javax.imageio.ImageIO
 
 object Day06 {
 
@@ -22,6 +26,20 @@ object Day06 {
       return (action, parseRange(rangeStr))
     }
     throw new IllegalArgumentException("invalid line: " + line)
+  }
+
+  def savePart1Image(lights: Array[Array[Boolean]]): Unit = {
+    val img = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB)
+    for (x <- 0 to 999) {
+      for (y <- 0 to 999) {
+        if (lights(x)(y)) {
+          img.setRGB(x, y, Color.WHITE.getRGB)
+        } else {
+          img.setRGB(x, y, Color.BLACK.getRGB)
+        }
+      }
+    }
+    ImageIO.write(img, "png", new File("day06-part1.png"))
   }
 
   def solvePart1() : Int = {
@@ -51,7 +69,27 @@ object Day06 {
       }
     }
 
+    savePart1Image(lights)
+
     numLightsOn
+  }
+
+  def savePart2Image(lights: Array[Array[Int]]): Unit = {
+    var brightestLight = 0
+    for (x <- 0 to 999) {
+      for (y <- 0 to 999) {
+        if (lights(x)(y) > brightestLight) {
+          brightestLight = lights(x)(y)
+        }
+      }
+    }
+    val img = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB)
+    for (x <- 0 to 999) {
+      for (y <- 0 to 999) {
+        img.setRGB(x, y, (255*lights(x)(y))/brightestLight)
+      }
+    }
+    ImageIO.write(img, "png", new File("day06-part2.png"))
   }
 
   def solvePart2(): Int = {
@@ -81,6 +119,8 @@ object Day06 {
         totalBrightness += lights(x)(y)
       }
     }
+
+    savePart2Image(lights)
 
     totalBrightness
   }
