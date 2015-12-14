@@ -28,4 +28,5 @@ object Day04 {
     println("the 5-zero advent coin number for 'ckczppom' is: " + fiveZeroNum)
     println("the 6-zero advent coin number for 'ckczppom' is: " + sixZeroNum)
   }
+
 }

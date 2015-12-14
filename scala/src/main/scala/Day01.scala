@@ -1,4 +1,5 @@
 object Day01 {
+
   def findFloor(input: String): Int = {
     var floor = 0
     for (ch <- input) {
@@ -38,4 +39,5 @@ object Day01 {
     println("final floor: " + finalFloor)
     println("first entered basement at index: " + firstBasementIndex)
   }
+
 }

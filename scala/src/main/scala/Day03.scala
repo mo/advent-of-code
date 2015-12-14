@@ -34,4 +34,5 @@ object Day03 {
     println("houses visited part 1: " + housesVisitedPart1)
     println("houses visited part 2: " + housesVisitedPart2)
   }
+
 }

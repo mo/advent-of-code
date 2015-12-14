@@ -16,7 +16,6 @@ object Day02 {
   def calcNeededRibbon(giftDimensions: (Int, Int, Int)): Int = {
     val (l, w, h) = giftDimensions
     Seq(l, w, h).sorted.take(2).map(_*2).sum + l*w*h
-
   }
 
   def solve(): (Int, Int) = {
