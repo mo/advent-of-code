@@ -1,5 +1,3 @@
-import scala.util.matching.Regex
-
 object Day08 {
 
   def unescapeHexByte(hexByte: String): String = {

@@ -1,4 +1,3 @@
-
 object Day03 {
 
   def calcVisitedHouses(directions: String): Set[(Int, Int)] = {
