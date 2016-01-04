@@ -6,12 +6,7 @@ object Day25 {
   }
 
   def calcCodeForRowAndColumn(row: Long, column: Long): Long = {
-    var code = 20151125L
-    (1L to calcIndexFromRowAndColumn(row, column) - 1).foreach {
-      _ =>
-        code = code * 252533 % 33554393
-    }
-    code
+    20151125*BigInt(252533).modPow(calcIndexFromRowAndColumn(row, column) - 1, 33554393).toLong % 33554393
   }
 
   def solve(): Long = {
