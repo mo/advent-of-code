@@ -11,8 +11,8 @@ class Day02Tests {
 
   @Test
   def verifyExamplesPart2(): Unit = {
-    assertEquals(34, Day02.calcNeededRibbon(Day02.parseDimensions("2x3x4")));
-    assertEquals(14, Day02.calcNeededRibbon(Day02.parseDimensions("1x1x10")));
+    assertEquals(34, Day02.calcNeededRibbon(Day02.parseDimensions("2x3x4")))
+    assertEquals(14, Day02.calcNeededRibbon(Day02.parseDimensions("1x1x10")))
   }
 
   @Test

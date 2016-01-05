@@ -10,30 +10,23 @@ object Day02 {
     val (l, w, h) = giftDimensions
     val sideAreas = Seq(l*w, w*h, h*l)
     val slack = sideAreas.min
-    sideAreas.map(_*2).sum + slack
+    2 * sideAreas.sum + slack
   }
 
   def calcNeededRibbon(giftDimensions: (Int, Int, Int)): Int = {
     val (l, w, h) = giftDimensions
-    Seq(l, w, h).sorted.take(2).map(_*2).sum + l*w*h
+    2 * Seq(l, w, h).sorted.take(2).sum + l*w*h
   }
 
   def solve(): (Int, Int) = {
-    val inputFile = DataFolder.openFile("day02.txt")
-    var totalPaperNeeded = 0
-    var totalRibbonNeeded = 0
-    for (giftDimensionLine <- inputFile.getLines()) {
-      val giftDimensions = parseDimensions(giftDimensionLine)
-      totalPaperNeeded += calcNeededPaper(giftDimensions)
-      totalRibbonNeeded += calcNeededRibbon(giftDimensions)
-    }
-    (totalPaperNeeded, totalRibbonNeeded)
+    val packageDimensions = DataFolder.openFile("day02.txt").getLines().map(parseDimensions).toList
+    (packageDimensions.map(calcNeededPaper).sum, packageDimensions.map(calcNeededRibbon).sum)
   }
 
   def main(args: Array[String]): Unit = {
     val (totalPaperNeeded, totalRibbonNeeded) = solve()
-    println("total paper needed: " + totalPaperNeeded + " square feet")
-    println("total ribbon needed: " + totalRibbonNeeded + " feet")
+    println(s"total paper needed: $totalPaperNeeded square feet")
+    println(s"total ribbon needed: $totalRibbonNeeded feet")
   }
 
 }
