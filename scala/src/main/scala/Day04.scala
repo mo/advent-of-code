@@ -3,20 +3,13 @@ import java.security.MessageDigest
 object Day04 {
 
   def md5(s: String) = MessageDigest.getInstance("MD5").digest(s.getBytes)
-  def bytesToHex(bytes: Array[Byte]): String = bytes.map("%02X" format _).mkString
 
   def calcAdventCoinNumber(zeros: Int, key: String) : Int = {
-    var num = 1
-    var hash = md5(key + num)
-    while (!bytesToHex(hash).startsWith("0" * zeros)) {
-      num += 1
-      hash = md5(key + num)
-      while (hash(0) != 0) {
-        num += 1
-        hash = md5(key + num)
-      }
+    Iterator.from(0).indexWhere {
+      i =>
+        val hash = md5(key + i)
+        hash(0) == 0 && hash.slice(0, 1 + zeros / 2).flatMap(byte => Seq(byte >> 4, byte & 0xF)).slice(0, zeros).forall(_ == 0)
     }
-    num
   }
 
   def solve(): (Int, Int) = {
@@ -25,8 +18,8 @@ object Day04 {
 
   def main(args: Array[String]): Unit = {
     val (fiveZeroNum, sixZeroNum) = solve()
-    println("the 5-zero advent coin number for 'ckczppom' is: " + fiveZeroNum)
-    println("the 6-zero advent coin number for 'ckczppom' is: " + sixZeroNum)
+    println(s"the 5-zero advent coin number for 'ckczppom' is: $fiveZeroNum")
+    println(s"the 6-zero advent coin number for 'ckczppom' is: $sixZeroNum")
   }
 
 }
