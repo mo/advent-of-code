@@ -27,6 +27,19 @@ class Day07Tests {
   }
 
   @Test
+  def verifyAdditionalCases(): Unit = {
+    val circuitStr = """32769 -> a
+                        a LSHIFT 1 -> b"""
+    val circuit = Day07.parseCircuit(circuitStr)
+    assertEquals(2, Day07.calcWireSignal(circuit, "b", Map[String, Int]()))
+
+    val circuitStr2 = """1 -> a
+                         NOT a -> b"""
+    val circuit2 = Day07.parseCircuit(circuitStr2)
+    assertEquals(65534, Day07.calcWireSignal(circuit2, "b", Map[String, Int]()))
+  }
+
+  @Test
   def verifyCorrectAnswers(): Unit = {
     val (signalPart1, signalPart2) = Day07.solve()
     assertEquals(3176, signalPart1)
