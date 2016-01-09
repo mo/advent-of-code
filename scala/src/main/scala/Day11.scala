@@ -1,6 +1,6 @@
 object Day11 {
 
-  val ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+  val alphabet = "abcdefghijklmnopqrstuvwxyz"
 
   def nextWord(word: String, alphabet: String): String = {
     val alphabetLastChar = alphabet.last
@@ -12,11 +12,11 @@ object Day11 {
   }
 
   def nextWordRegularAlphabet(word: String): String = {
-    nextWord(word, ALPHABET)
+    nextWord(word, alphabet)
   }
 
   def containsIncreasingStraight(word: String): Boolean = {
-    val increasingStraights = ALPHABET.sliding(3)
+    val increasingStraights = alphabet.sliding(3)
     increasingStraights.exists(word.contains(_))
   }
 

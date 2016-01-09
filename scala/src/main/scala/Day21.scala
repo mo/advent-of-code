@@ -2,7 +2,7 @@ import scala.collection.mutable.ListBuffer
 
 object Day21 {
 
-  val WEAPONS = List(
+  val weapons = List(
     ("Dagger",      8, 4, 0),
     ("Shortsword", 10, 5, 0),
     ("Warhammer",  25, 6, 0),
@@ -10,7 +10,7 @@ object Day21 {
     ("Greataxe",   74, 8, 0)
   )
 
-  val ARMORS = List(
+  val armors = List(
     ("None",          0,     0,       0),
     ("Leather",      13,     0,       1),
     ("Chainmail",    31,     0,       2),
@@ -19,7 +19,7 @@ object Day21 {
     ("Platemail",   102,     0,       5)
   )
 
-  val RINGS = List(
+  val rings = List(
     ("None #1",       0,     0,       0),
     ("None #2",       0,     0,       0),
     ("Damage +1",    25,     1,       0),
@@ -51,7 +51,7 @@ object Day21 {
 
   def calcCostsAndOutcomes(): List[(Int, Boolean)] = {
     val costsAndOutcomes = ListBuffer[(Int, Boolean)]()
-    for (weapon <- WEAPONS; armor <- ARMORS; ring1 <- RINGS; ring2 <- RINGS) {
+    for (weapon <- weapons; armor <- armors; ring1 <- rings; ring2 <- rings) {
       if (ring1 != ring2) {
         val totalCost = weapon._2 + armor._2 + ring1._2 + ring2._2
         val totalDamage = weapon._3 + armor._3 + ring1._3 + ring2._3

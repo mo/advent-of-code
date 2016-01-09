@@ -54,10 +54,10 @@ class Day11Tests {
 
   @Test
   def verifyExamplesPart1(): Unit = {
-    assertEquals("xy", Day11.nextWord("xx", Day11.ALPHABET))
-    assertEquals("xz", Day11.nextWord("xy", Day11.ALPHABET))
-    assertEquals("ya", Day11.nextWord("xz", Day11.ALPHABET))
-    assertEquals("yb", Day11.nextWord("ya", Day11.ALPHABET))
+    assertEquals("xy", Day11.nextWord("xx", Day11.alphabet))
+    assertEquals("xz", Day11.nextWord("xy", Day11.alphabet))
+    assertEquals("ya", Day11.nextWord("xz", Day11.alphabet))
+    assertEquals("yb", Day11.nextWord("ya", Day11.alphabet))
 
     assertTrue(Day11.containsIncreasingStraight("hijklmmn"))
     assertTrue(Day11.containsBadChars("hijklmmn"))

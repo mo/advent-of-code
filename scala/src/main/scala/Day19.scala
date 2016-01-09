@@ -2,11 +2,11 @@ import scala.util.Random
 
 object Day19 {
 
-  val TRANSFORMATION_SPEC = """(\w+) => (\w+)""".r
+  val transformationPattern = """(\w+) => (\w+)""".r
 
   def distinctOutputs(input: String, transformationsStr: String): Set[String] = {
     val transformations = transformationsStr.split("\n").map {
-      case TRANSFORMATION_SPEC(from, to) => (from, to)
+      case transformationPattern(from, to) => (from, to)
     }
     transformations.flatMap {
       case (from, to) => from.r.findAllMatchIn(input).map(_.start).map {
@@ -19,7 +19,7 @@ object Day19 {
 
   def stepsNeededToRestoreE(transformationsStr: String, startingMolecule: String): Int = {
     var transformations = transformationsStr.split("\n").map {
-      case TRANSFORMATION_SPEC(from, to) => (from, to)
+      case transformationPattern(from, to) => (from, to)
     }.toList
     def calcStepsNeeded(transformations: List[(String, String)], startingMolecule: String): Int = {
       var stepsUsed = 0

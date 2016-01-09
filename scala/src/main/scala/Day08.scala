@@ -5,8 +5,8 @@ object Day08 {
   }
 
   def unescape(str: String): String = {
-    val HEX_ESCAPE_PATTERN = """\\x([0-9a-f][0-9a-f])""".r
-    val unescapedHexEscapes = HEX_ESCAPE_PATTERN.replaceAllIn(str, m => unescapeHexByte(m.group(1)))
+    val hexEscapePattern = """\\x([0-9a-f][0-9a-f])""".r
+    val unescapedHexEscapes = hexEscapePattern.replaceAllIn(str, m => unescapeHexByte(m.group(1)))
     unescapedHexEscapes.replaceAllLiterally("""\\""", """\""").replaceAllLiterally("\\\"", "\"")
   }
 

@@ -3,7 +3,7 @@ import scala.util.matching.Regex
 
 object Day15 {
 
-  val INGREDIENT_PATTERN = """(\w+): capacity (-?\d+), durability (-?\d+), flavor (-?\d+), texture (-?\d+), calories (-?\d+)""".r
+  val ingredientPattern = """(\w+): capacity (-?\d+), durability (-?\d+), flavor (-?\d+), texture (-?\d+), calories (-?\d+)""".r
   case class Ingredient(name: String, capacity: Int, durability: Int, flavor: Int, texture: Int, calories: Int)
 
   def weakCompositions(num: Int, termCount: Int): List[List[Int]] = {
@@ -49,8 +49,8 @@ object Day15 {
   }
 
   def parseIngredients(input: String): List[Ingredient] = {
-    INGREDIENT_PATTERN.findAllIn(input).map {
-      case INGREDIENT_PATTERN(name, capacity, durability, flavor, texture, calories) => Ingredient(name, capacity.toInt, durability.toInt, flavor.toInt, texture.toInt, calories.toInt)
+    ingredientPattern.findAllIn(input).map {
+      case ingredientPattern(name, capacity, durability, flavor, texture, calories) => Ingredient(name, capacity.toInt, durability.toInt, flavor.toInt, texture.toInt, calories.toInt)
     }.toList
   }
 

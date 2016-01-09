@@ -2,11 +2,11 @@ object Day14 {
 
   case class Reindeer(name: String, speed: Int, stamina: Int, rest: Int)
 
-  val REINDEER_SPEC = """(\w+) can fly (\d+) km/s for (\d+) seconds, but then must rest for (\d+) seconds.""".r
+  val reindeerPattern = """(\w+) can fly (\d+) km/s for (\d+) seconds, but then must rest for (\d+) seconds.""".r
 
   def parseReindeer(reindeerSpec: String): Reindeer = {
     reindeerSpec match {
-      case REINDEER_SPEC(name, speed, stamina, rest) => Reindeer(name, speed.toInt, stamina.toInt, rest.toInt)
+      case reindeerPattern(name, speed, stamina, rest) => Reindeer(name, speed.toInt, stamina.toInt, rest.toInt)
     }
   }
 

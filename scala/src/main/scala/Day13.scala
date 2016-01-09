@@ -1,14 +1,14 @@
 object Day13 {
 
-  val HAPPINESS_GAIN = """(\w+) would gain (\d+) happiness units by sitting next to (\w+).""".r
-  val HAPPINESS_LOSS = """(\w+) would lose (\d+) happiness units by sitting next to (\w+).""".r
+  val gainPattern = """(\w+) would gain (\d+) happiness units by sitting next to (\w+).""".r
+  val lossPattern = """(\w+) would lose (\d+) happiness units by sitting next to (\w+).""".r
 
   def optimalSeatingHappiness(seatingPreferences: String, apatheticGuests: List[String]): Int = {
     val seatingPreferenceLines = seatingPreferences.split("\n").map(_.trim)
     val allPersons = seatingPreferenceLines.map(_.split(" ")(0)).distinct ++ apatheticGuests
     val individualHappiness = seatingPreferenceLines.map {
-      case HAPPINESS_GAIN(personA, happiness, personB) => (personA, personB) -> happiness.toInt
-      case HAPPINESS_LOSS(personA, happiness, personB) => (personA, personB) -> -happiness.toInt
+      case gainPattern(personA, happiness, personB) => (personA, personB) -> happiness.toInt
+      case lossPattern(personA, happiness, personB) => (personA, personB) -> -happiness.toInt
     }.toMap
     def seatingHappiness(seating: List[String]): Int = {
       val reverseSeating = seating.reverse
