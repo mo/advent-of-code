@@ -3,12 +3,8 @@ object Day01 {
   def sumSame(input: String, matchDistance: Int): Int = {
     input
       .zipWithIndex
-      .filter {
-        case (ch, idx) => ch == input((idx + matchDistance) % input.length)
-      }
-      .map {
-        case (ch, idx) => ch.asDigit
-      }
+      .filter { case (ch, idx) => ch == input((idx + matchDistance) % input.length) }
+      .map { case (ch, idx) => ch.asDigit }
       .sum
   }
 
