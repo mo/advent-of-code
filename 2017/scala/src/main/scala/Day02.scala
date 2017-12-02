@@ -4,17 +4,16 @@ object Day02 {
     input
       .split("\n")
       .map(line => line.split("\\s+").map(_.toInt))
-      .map(line => line.foldLeft((Int.MaxValue, Int.MinValue))((acc, item) => (math.min(acc._1, item), math.max(acc._2, item))))
-      .map { case (min, max) => max - min }
-      .sum
+      .foldLeft(0)((acc, item) => acc + item.max - item.min)
   }
 
   def part2(input: String): Int = {
     input
       .split("\n")
-      .map(line => line.split("\\s+").map(_.toInt))
-      .map(line => line.combinations(2).find { case Array(a, b) => math.max(a, b) % math.min(a, b) == 0 }.get)
-      .map { case Array(a, b) => math.max(a, b) / math.min(a, b) }.sum
+      .map(_.split("\\s+").map(_.toInt))
+      .map(_.combinations(2).find(arr => arr.max % arr.min == 0).get)
+      .map(arr => arr.max / arr.min)
+      .sum
   }
 
   def solve(): (Int, Int) = {
