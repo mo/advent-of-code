@@ -1,22 +1,23 @@
 object Day01 {
 
-  def sequenceValuePart1(input: String): Int = {
-    (input + input(0)).sliding(2).map(s => {
-      if (s(0) == s(1)) { s(0).toString.toInt } else { 0 }
-    }).sum
+  def sumSame(input: String, matchDistance: Int): Int = {
+    input
+      .zipWithIndex
+      .filter {
+        case (ch, idx) => ch == input((idx + matchDistance) % input.length)
+      }
+      .map {
+        case (ch, idx) => ch.asDigit
+      }
+      .sum
   }
 
-  def sequenceValuePart2(input: String): Int = {
-    (input + input).sliding(input.length / 2 + 1).take(input.length).map(s => {
-      if (s.take(1) == s.takeRight(1)) { s(0).toString.toInt } else { 0 }
-    }).sum
-  }
+  def part1(input: String): Int = sumSame(input, 1)
+  def part2(input: String): Int = sumSame(input, input.length / 2)
 
   def solve(): (Int, Int) = {
     val input = DataFolder.openFile("day01.txt").mkString
-    val part1 = sequenceValuePart1(input)
-    val part2 = sequenceValuePart2(input)
-    (part1, part2)
+    (part1(input), part2(input))
   }
 
   def main(args: Array[String]): Unit = {
