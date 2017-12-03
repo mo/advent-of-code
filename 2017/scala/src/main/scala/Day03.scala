@@ -22,12 +22,14 @@ object Day03 {
   def part2(limit: Int): Int = {
     val squares = mutable.Map[(Int, Int), Int]().withDefaultValue(0)
     squares((0, 0)) = 1
+    def sumAdjacents(x: Int, y: Int) =
+      List((1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1))
+        .map { case (dx, dy) => squares(x + dx, y + dy)}.sum
 
     spiral
       .drop(1)
       .map { case (x, y) =>
-        val squareValue = squares((x - 1, y - 1)) + squares((x, y - 1)) + squares((x + 1, y - 1)) +
-        squares((x - 1, y)) + squares((x + 1, y)) + squares((x - 1, y + 1)) + squares((x, y + 1)) + squares((x + 1, y + 1))
+        val squareValue = sumAdjacents(x, y)
         squares((x, y)) = squareValue
         squareValue
       }.dropWhile(_ <= limit).next
