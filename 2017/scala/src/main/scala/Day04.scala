@@ -1,10 +1,10 @@
 object Day04 {
 
   def isValidPassphrasePart1(phrase: String): Boolean =
-    !phrase.split("\\s+").groupBy(i => i).map{ case (k, v) => v.length }.exists(_ > 1)
+    phrase.split("\\s+").groupBy(identity).values.forall(_.length == 1)
 
   def isValidPassphrasePart2(phrase: String): Boolean =
-    !phrase.split("\\s+").map(_.sorted).groupBy(i => i).map{ case (k, v) => v.length }.exists(_ > 1)
+    phrase.split("\\s+").map(_.sorted).groupBy(identity).values.forall(_.length == 1)
 
   def solve(): (Int, Int) = {
     val input = DataFolder.openFile("day04.txt").mkString
