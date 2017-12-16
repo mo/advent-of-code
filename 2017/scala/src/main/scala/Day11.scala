@@ -18,22 +18,28 @@ object Day11 {
 
   def pathLength(pathInput: List[String]): Int = {
     var path = pathInput.groupBy(identity).mapValues(_.length).withDefaultValue(0)
-    var someSimplified = false
+    var simplifiedSomething = false
     do {
-      someSimplified = false
+      simplifiedSomething = false
       for ((dir, oppositeDir) <- opposites) {
         if (path(dir) > 0 && path(oppositeDir) > 0) {
-          path = path.updated(dir, path(dir) - 1).updated(oppositeDir, path(oppositeDir) - 1)
-          someSimplified = true
+          path = path
+            .updated(dir, math.max(0, path(dir) - path(oppositeDir)))
+            .updated(oppositeDir, math.max(0, path(oppositeDir) - path(dir)))
+          simplifiedSomething = true
         }
       }
       for ((step1, step2, shortcut) <- shortcuts) {
         if (path(step1) > 0 && path(step2) > 0) {
-          path = path.updated(step1, path(step1) - 1).updated(step2, path(step2) - 1).updated(shortcut, path(shortcut) + 1)
-          someSimplified = true
+          val count = math.min(path(step1), path(step2))
+          path = path
+            .updated(step1, path(step1) - count)
+            .updated(step2, path(step2) - count)
+            .updated(shortcut, path(shortcut) + count)
+          simplifiedSomething = true
         }
       }
-    } while (someSimplified)
+    } while (simplifiedSomething)
 
     path.values.sum
   }
