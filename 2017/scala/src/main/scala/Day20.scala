@@ -13,9 +13,36 @@ object Day20 {
   def move(p: Particle): Particle = p.copy(vx = p.vx + p.ax, vy = p.vy + p.ay, vz = p.vz + p.az,
                                            x = p.x + p.vx + p.ax, y = p.y + p.vy + p.ay, z = p.z + p.vz + p.az)
 
-  def part1(input: String): Int = parse(input).minBy {
-    case Particle(_, x, y, z, vx, vy, vz, ax, ay, az) => (ax.abs + ay.abs + az.abs, vx.abs + vy.abs + vz.abs, x.abs + y.abs + z.abs)
-  }.id
+  def part1(input: String): Int = {
+    val particles = parse(input)
+    val smallestAccel = particles.map {
+      case Particle(_, _, _, _, _, _, _, ax, ay, az) => ax.abs + ay.abs + az.abs
+    }.min
+    val particlesWithSmallestAccel = particles.filter {
+      case Particle(_, _, _, _, _, _, _, ax, ay, az) => ax.abs + ay.abs + az.abs == smallestAccel
+    }
+    if (smallestAccel == 0) {
+      val smallestVelocity = particlesWithSmallestAccel.map {
+        case Particle(_, _, _, _, vx, vy, vz, _, _, _) => vx.abs + vy.abs + vz.abs
+      }.min
+      val particlesWithSmallestVelocity = particlesWithSmallestAccel.filter {
+        case Particle(_, _, _, _, vx, vy, vz, _, _, _) => vx.abs + vy.abs + vz.abs == smallestVelocity
+      }
+      particlesWithSmallestVelocity.minBy {
+        case Particle(_, x, y, z, _, _, _, _, _, _) => x.abs + y.abs + z.abs
+      }.id
+    } else {
+      val smallestVdotA = particlesWithSmallestAccel.map {
+        case Particle(_, _, _, _, vx, vy, vz, ax, ay, az) => vx * ax + vy * ay + vz * az
+      }.min
+      val particlesWithSmallestVdotA = particlesWithSmallestAccel.filter {
+        case Particle(_, _, _, _, vx, vy, vz, ax, ay, az) => vx * ax + vy * ay + vz * az == smallestVdotA
+      }
+      particlesWithSmallestVdotA.minBy {
+        case Particle(_, x, y, z, _, _, _, _, _, _) => x.abs + y.abs + z.abs
+      }.id
+    }
+  }
 
   def part2(input: String): Int = {
     var finishedParticles = 0
