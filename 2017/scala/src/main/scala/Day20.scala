@@ -47,7 +47,6 @@ object Day20 {
   def part2(input: String): Int = {
     var finishedParticles = 0
     var particles = parse(input)
-    var byAccel = Array[Particle]()
     do {
       particles = particles.map(move).groupBy {
         case Particle(_, x, y, z, _, _, _, _, _, _) => (x, y, z)

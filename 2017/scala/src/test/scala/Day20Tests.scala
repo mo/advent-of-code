@@ -20,9 +20,7 @@ class Day20Tests {
 
     assertEquals(1, Day20.part1("""p=<2,0,0>, v=<1,0,0>, a=<1,0,0>
                                   |p=<1,0,0>, v=<1,0,0>, a=<1,0,0>""".stripMargin))
-
   }
-
 
 
   @Test
