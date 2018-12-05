@@ -2,29 +2,9 @@ import scala.annotation.tailrec
 
 object Day05 {
 
-//  @tailrec
-//  def react(polymer: String): String = {
-//    println("len=" + polymer.length)
-//    reactOnce(polymer) match {
-//      case (false, _) => polymer
-//      case (true, newPolymer) => react(newPolymer)
-//    }
-//  }
-//
-//  def reactOnce(polymer: String): (Boolean, String) = polymer.toList match {
-//    case a :: b :: tail if a.isLower != b.isLower && a.toLower == b.toLower =>
-//      (true, tail.mkString)
-//    case a :: tail =>
-//      val (reacted, newPolymer) = reactOnce(tail.mkString)
-//      (reacted, a + newPolymer)
-//    case Nil =>
-//      (false, "")
-//  }
-//  def part1(input: String): Int = react(input).length
-
   def react(input: String): String = {
     var polymer = input
-    ('a' to 'z').foreach(letter => {
+    input.toLowerCase.distinct.foreach(letter => {
       val uLetter = letter.toUpper
       polymer = polymer.replaceAll("" + letter + uLetter, "")
       polymer = polymer.replaceAll("" + uLetter + letter, "")
@@ -38,8 +18,9 @@ object Day05 {
 
   def part1(input: String): Int = react(input).length
   def part2(input: String): Int = {
-    ('a' to 'z').map(dropLetter => {
-      react(input.filter(ch => ch != dropLetter && ch != dropLetter.toUpper)).length
+    val reacted = react(input)
+    reacted.distinct.map(dropLetter => {
+      react(reacted.filter(ch => ch != dropLetter && ch != dropLetter.toUpper)).length
     }).min
   }
 
