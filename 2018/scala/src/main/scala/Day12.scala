@@ -2,31 +2,25 @@ object Day12 {
 
   def part1(generations: Long, input: String): Int = {
     val initialLine = """initial state: ([#\.]+)""".r
-    var pots = initialLine.findFirstMatchIn(input).get.group(1)
+    val initialState = (0, initialLine.findFirstMatchIn(input).get.group(1))
     val transformLine = """([#\.]{5}) => ([#\.])""".r
     val transforms = input.split("\n").flatMap {
       case transformLine(from, to) => Some(from -> to)
       case _ => None
     }.toMap.withDefault(_ => ".")
 
-    var gen = 1
-    var leftmostPotIndex = 0
-    var lastPrint = 0L
-    while (gen <= generations) {
-      pots = ("...." + pots + "....").sliding(5).map(transforms).mkString
-      leftmostPotIndex -= 2
-      val initialDotCount = pots.indexWhere(_ != '.')
-      pots = pots.splitAt(initialDotCount)._2
-      leftmostPotIndex += initialDotCount
-      gen += 1
-      if (System.currentTimeMillis() - lastPrint > 2000) {
-        println("progress " + gen + " " + s"%.4f".format((100*gen.toDouble/generations)))
-        lastPrint = System.currentTimeMillis()
-      }
-    }
+    println(initialState._1 + " " + initialState._2)
+    val (finalLeftmostPotNumber, finalState) = (1L to generations).foldLeft(initialState)((state, _) => {
+      val newPots = ("...." + state._2 + "....").sliding(5).map(transforms).mkString
+      val initialDotCount = newPots.indexWhere(_ != '.')
+      val (_, newPots2) = newPots.splitAt(initialDotCount)
+      val newLeftmostPotNumber = state._1 - 2 + initialDotCount
+      println(newLeftmostPotNumber + " " + newPots2)
+      (newLeftmostPotNumber, newPots2)
+    })
 
-    pots.zipWithIndex.flatMap {
-      case ('#', idx) => Some(leftmostPotIndex + idx)
+    finalState.zipWithIndex.flatMap {
+      case ('#', idx) => Some(finalLeftmostPotNumber + idx)
       case _ => None
     }.sum
   }
