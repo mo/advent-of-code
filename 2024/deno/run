@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DAY=$1
+
+if [ "$DAY" == "" ]; then
+	echo "usage:"
+	echo
+	echo "   run day01"
+	echo "   run day02"
+	echo "   run day03"
+	echo "   ..."
+	echo
+	exit 1
+fi
+
+deno -A $DAY.js
